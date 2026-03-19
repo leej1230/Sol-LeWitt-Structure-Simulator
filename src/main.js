@@ -15,7 +15,7 @@ const camera = new THREE.PerspectiveCamera(
 camera.position.set(20, 18, 28);
 camera.lookAt(6, 0, 6);
 
-const renderer = new THREE.WebGLRenderer({ antialias: true });
+const renderer = new THREE.WebGLRenderer({ antialias: true, preserveDrawingBuffer: true });
 renderer.setSize(window.innerWidth, window.innerHeight);
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 document.body.appendChild(renderer.domElement);
@@ -543,6 +543,18 @@ const creditOverlay = document.getElementById("credit-overlay");
 const creditClose = document.getElementById("credit-close");
 
 creditBtn.addEventListener("click", () => creditOverlay.classList.add("open"));
+
+// Screenshot
+function takeScreenshot() {
+  const link = document.createElement("a");
+  link.download = "solwit-square.png";
+  link.href = renderer.domElement.toDataURL("image/png");
+  link.click();
+}
+document.getElementById("screenshot-btn").addEventListener("click", takeScreenshot);
+document.addEventListener("keydown", (e) => {
+  if (e.code === "KeyP") takeScreenshot();
+});
 creditClose.addEventListener("click", () => creditOverlay.classList.remove("open"));
 creditOverlay.addEventListener("click", (e) => {
   if (e.target === creditOverlay) creditOverlay.classList.remove("open");
