@@ -547,7 +547,7 @@ creditBtn.addEventListener("click", () => creditOverlay.classList.add("open"));
 // Screenshot
 function takeScreenshot() {
   const link = document.createElement("a");
-  link.download = "solwit-square.png";
+  link.download = "sol-lewitt-square.png";
   link.href = renderer.domElement.toDataURL("image/png");
   link.click();
 }
